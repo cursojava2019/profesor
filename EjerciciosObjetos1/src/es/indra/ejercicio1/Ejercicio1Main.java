@@ -3,12 +3,12 @@ package es.indra.ejercicio1;
 import java.util.Scanner;
 
 public class Ejercicio1Main {
-	private static Scanner entrada;
-	private static Cuenta cuenta;
+	private static Scanner ENTRADA;
+	private static Cuenta CUENTA;
 
 	public static void inicializar() {
-		entrada = new Scanner(System.in);
-		cuenta = null;
+		ENTRADA = new Scanner(System.in);
+		CUENTA = null;
 	}
 
 	public static void main(String[] args) {
@@ -21,8 +21,8 @@ public class Ejercicio1Main {
 			System.out.println("2. Añadir saldo");
 			System.out.println("3. Retirar saldo");
 			System.out.println("0. Finalizar");
-			opcion = entrada.nextInt();
-			entrada.nextLine();
+			opcion = ENTRADA.nextInt();
+			ENTRADA.nextLine();
 			switch (opcion) {
 			case 1:
 				inicializarCuenta();
@@ -43,43 +43,43 @@ public class Ejercicio1Main {
 	}
 
 	private static void retirarSaldo() {
-		if (cuenta != null) {
+		if (CUENTA != null) {
 			System.out.println("Introduzca el saldo que desea retirar y pulse intro");
-			Double saldo = entrada.nextDouble();
-			entrada.nextLine();
-			cuenta.retirar(saldo);
-			System.out.println("El resultado de la operacion es: " + cuenta.toString());
+			Double saldo = ENTRADA.nextDouble();
+			ENTRADA.nextLine();
+			CUENTA.retirar(saldo);
+			System.out.println("El resultado de la operacion es: " + CUENTA.toString());
 		} else {
 			System.out.println("Debe inicializar la cuenta antes de hacer un ingreso. ");
 		}
 		System.out.println("Pulse intro para continuar...");
-		entrada.nextLine();
+		ENTRADA.nextLine();
 	}
 
 	private static void aniadirSaldo() {
-		if (cuenta != null) {
+		if (CUENTA != null) {
 			System.out.println("Introduzca el saldo que desea añadir y pulse intro");
-			Double saldo = entrada.nextDouble();
-			entrada.nextLine();
-			cuenta.ingresar(saldo);
-			System.out.println("El resultado de la operacion es: " + cuenta.toString());
+			Double saldo = ENTRADA.nextDouble();
+			ENTRADA.nextLine();
+			CUENTA.ingresar(saldo);
+			System.out.println("El resultado de la operacion es: " + CUENTA.toString());
 		} else {
 			System.out.println("Debe inicializar la cuenta antes de hacer un ingreso. ");
 		}
 		System.out.println("Pulse intro para continuar...");
-		entrada.nextLine();
+		ENTRADA.nextLine();
 	}
 
 	private static void inicializarCuenta() {
 		System.out.println("Introduzca el nombre del titular y pulse intro");
-		String titular = entrada.nextLine();
+		String titular = ENTRADA.nextLine();
 		System.out.println("Introduzca el la cantidad del saldo");
-		Double saldo = entrada.nextDouble();
-		entrada.nextLine();
-		cuenta = new Cuenta(titular, saldo);
-		System.out.println("El resultado de la operacion es: " + cuenta.toString());
+		Double saldo = ENTRADA.nextDouble();
+		ENTRADA.nextLine();
+		CUENTA = new Cuenta(titular, saldo);
+		System.out.println("El resultado de la operacion es: " + CUENTA.toString());
 		System.out.println("Pulse intro para continuar...");
-		entrada.nextLine();
+		ENTRADA.nextLine();
 	}
 
 }
