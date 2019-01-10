@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package es.indra.ejercicio1;
 
@@ -15,7 +15,7 @@ public class Ejercicio1 {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
 		Scanner entrada = new Scanner(System.in);
 		System.out.println("Introduzca un numero para ver si es divisible por 2");
 		int leido = entrada.nextInt();

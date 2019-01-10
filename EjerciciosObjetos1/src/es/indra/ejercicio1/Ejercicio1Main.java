@@ -11,11 +11,17 @@ public class Ejercicio1Main {
 		CUENTA = null;
 	}
 
+	public static void limpiar() {
+		for (int i = 0; i < 50; ++i) {
+			System.out.println();
+		}
+	}
+
 	public static void main(String[] args) {
 		inicializar();
 		int opcion = 0;
 		do {
-			System.out.flush();
+			limpiar();
 			System.out.println("Introduzca la Operacion que desea Realizar");
 			System.out.println("1. Inicilizar Cuenta");
 			System.out.println("2. Añadir saldo");
