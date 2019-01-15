@@ -211,17 +211,22 @@ public class Programa {
 			if (!file.exists()) {
 				try {
 					file.createNewFile();
-
-					PrintWriter salida = new PrintWriter(file);
-					salida.println(venta.toString());
-					salida.flush();
-					salida.close();
-
 				} catch (IOException e) {
 					System.out.println("Error al crear fichero");
 					e.printStackTrace();
 				}
 
+			}
+			PrintWriter salida;
+			try {
+				salida = new PrintWriter(file);
+
+				salida.println(venta.toString());
+				salida.flush();
+				salida.close();
+			} catch (FileNotFoundException e) {
+
+				e.printStackTrace();
 			}
 			System.out.println("Venta realizada Correctamente.");
 
