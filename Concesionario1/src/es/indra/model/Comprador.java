@@ -1,8 +1,9 @@
 package es.indra.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Comprador {
+public class Comprador implements Serializable {
 	private String dni;
 	private String nombre;
 	private String apellidos;
@@ -79,6 +80,13 @@ public class Comprador {
 
 	public void setPropiedades(ArrayList<Vehiculo> propiedades) {
 		this.propiedades = propiedades;
+	}
+
+	@Override
+	public String toString() {
+		return "Comprador [dni=" + this.dni + ", nombre=" + this.nombre + ", apellidos=" + this.apellidos
+				+ ", telefono=" + this.telefono + ", direccion=" + this.direccion + ", cp=" + this.cp + ", propiedades="
+				+ this.propiedades + "]";
 	}
 
 }

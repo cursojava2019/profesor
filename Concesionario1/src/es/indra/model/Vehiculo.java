@@ -1,6 +1,8 @@
 package es.indra.model;
 
-public class Vehiculo {
+import java.io.Serializable;
+
+public class Vehiculo implements Serializable {
 
 	public static String COCHE = "coche";
 	public static String MOTO = "moto";
@@ -82,6 +84,12 @@ public class Vehiculo {
 
 	public void setVendido(Boolean vendido) {
 		this.vendido = vendido;
+	}
+
+	@Override
+	public String toString() {
+		return "Vehiculo [codigo=" + this.codigo + ", marca=" + this.marca + ", tipo=" + this.tipo + ", anio="
+				+ this.anio + ", kilometraje=" + this.kilometraje + ", vendido=" + this.vendido + "]";
 	}
 
 }
