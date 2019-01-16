@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -217,14 +217,14 @@ public class Programa {
 				}
 
 			}
-			PrintWriter salida;
+			FileWriter salida;
 			try {
-				salida = new PrintWriter(file);
+				salida = new FileWriter(file, true);
 
-				salida.println(venta.toString());
+				salida.write(venta.toString());
 				salida.flush();
 				salida.close();
-			} catch (FileNotFoundException e) {
+			} catch (Exception e) {
 
 				e.printStackTrace();
 			}
