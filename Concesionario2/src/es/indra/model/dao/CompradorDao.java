@@ -1,4 +1,4 @@
-package es.indra.model;
+package es.indra.model.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import es.indra.model.entities.Comprador;
+import es.indra.model.entities.Vehiculo;
 import es.indra.model.support.Dao;
 import es.indra.model.support.DaoException;
 import es.indra.model.support.DatosConexion;
@@ -56,8 +57,26 @@ public class CompradorDao implements Dao<String, Comprador> {
 
 	@Override
 	public Comprador find(String key) throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
+		Comprador comprador = null;
+		try {
+			Connection co = getConexion();
+			String query = "SELECT * FROM COMPRADOR WHERE dni=?";
+			PreparedStatement instruccion = co.prepareStatement(query);
+			PreparedStatement ps = co.prepareStatement("SELECT * FROM VEHICULO WHERE dni=?");
+			instruccion.setString(1, key);
+			ResultSet resultados = instruccion.executeQuery();
+			if (resultados.next()) {
+				comprador = obtenerComprador(resultados);
+				ps.setString(1, key);
+				ResultSet resultado = ps.executeQuery();
+				comprador.setPropiedades(obtenerVehiculos(resultado));
+			}
+			co.close();
+			return comprador;
+		} catch (SQLException e) {
+			System.out.println("Error creando objeto en BBDD");
+			throw new DaoException();
+		}
 	}
 
 	@Override
@@ -65,6 +84,7 @@ public class CompradorDao implements Dao<String, Comprador> {
 		try {
 			Connection co = getConexion();
 			Statement instruccion = co.createStatement();
+			PreparedStatement ps = co.prepareStatement("SELECT * FROM VEHICULO WHERE dni=?");
 
 			String query = "SELECT * FROM COMPRADOR";
 			ResultSet resultados = instruccion.executeQuery(query);
@@ -72,13 +92,12 @@ public class CompradorDao implements Dao<String, Comprador> {
 			ArrayList<Comprador> listado = new ArrayList<Comprador>();
 
 			while (resultados.next()) {
-				String nif = resultados.getString(1);
-				String nombre = resultados.getString(2);
-				String apellidos = resultados.getString(3);
-				String telefono = resultados.getString(4);
-				String direccion = resultados.getString(5);
 
-				Comprador comprador = new Comprador(nif, nombre, apellidos, telefono, direccion, "");
+				Comprador comprador = obtenerComprador(resultados);
+				ps.setString(1, comprador.getDni());
+				ResultSet resultado = ps.executeQuery();
+				comprador.setPropiedades(obtenerVehiculos(resultado));
+
 				listado.add(comprador);
 			}
 
@@ -88,6 +107,27 @@ public class CompradorDao implements Dao<String, Comprador> {
 			System.out.println("Error creando objeto en BBDD");
 			throw new DaoException();
 		}
+	}
+
+	private Comprador obtenerComprador(ResultSet resultado) throws SQLException {
+		String nif = resultado.getString(1);
+		String nombre = resultado.getString(2);
+		String apellidos = resultado.getString(3);
+		String telefono = resultado.getString(4);
+		String direccion = resultado.getString(5);
+		Comprador comprador = new Comprador(nif, nombre, apellidos, telefono, direccion, "");
+		return comprador;
+
+	}
+
+	private List<Vehiculo> obtenerVehiculos(ResultSet resultado) throws SQLException {
+		ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
+		while (resultado.next()) {
+
+			Vehiculo vehiculo = VehiculoDao.obtenerVehiculo(resultado);
+			vehiculos.add(vehiculo);
+		}
+		return vehiculos;
 	}
 
 }
