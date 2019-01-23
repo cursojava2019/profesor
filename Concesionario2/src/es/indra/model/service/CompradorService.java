@@ -9,6 +9,10 @@ public class CompradorService extends Service<String, Comprador> {
 
 	private CompradorDao dao = null;
 
+	public CompradorService() {
+		this.dao = new CompradorDao();
+	}
+
 	@Override
 	protected Dao<String, Comprador> getDao() {
 		if (this.dao == null) {

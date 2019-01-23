@@ -64,6 +64,10 @@ public class Programa {
 					crearVenta();
 					fin();
 					break;
+				case 6:
+					listarCompradores();
+					fin();
+					break;
 				case 0:
 					System.out.println("Fin del programa");
 				default:
@@ -128,11 +132,11 @@ public class Programa {
 		System.out.println("Vehiculo añadido correctamente");
 	}
 
-	public static void listarVehiculosDisponibles() {
-		System.out.println("Listado de Vehiculos");
-		List<Vehiculo> listado = concesionario.vehiculosDisponibles();
-		for (Vehiculo vehiculo : listado) {
-			System.out.println(vehiculo);
+	public static void listarCompradores() {
+		System.out.println("Listado de Compradore");
+		List<Comprador> listado = concesionario.listarCompradores();
+		for (Comprador comprador : listado) {
+			System.out.println(comprador);
 		}
 	}
 
@@ -149,6 +153,14 @@ public class Programa {
 			}
 		} else {
 			System.out.println("El comprador indicado no esta en la BBDD");
+		}
+	}
+
+	public static void listarVehiculosDisponibles() {
+		System.out.println("Listado de Vehiculos");
+		List<Vehiculo> listado = concesionario.vehiculosDisponibles();
+		for (Vehiculo vehiculo : listado) {
+			System.out.println(vehiculo);
 		}
 	}
 
