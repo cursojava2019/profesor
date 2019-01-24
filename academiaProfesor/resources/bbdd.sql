@@ -27,7 +27,7 @@ CREATE TABLE public.alumno
 );
 
 
-CREATE TABLE public.profesores
+CREATE TABLE public.profesor
 (
     id bigint NOT NULL DEFAULT nextval('profesores_id_seq'::regclass),
     nombre character varying(100) COLLATE pg_catalog."default",
