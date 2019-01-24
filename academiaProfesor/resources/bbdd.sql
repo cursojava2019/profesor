@@ -1,3 +1,15 @@
+CREATE SEQUENCE public.alumno_id_seq;
+
+ALTER SEQUENCE public.alumno_id_seq
+    OWNER TO postgres;
+
+
+
+CREATE SEQUENCE public.profesores_id_seq;
+
+ALTER SEQUENCE public.profesores_id_seq
+    OWNER TO postgres;
+
 CREATE TABLE public.alumno
 (
     nombre character varying(100) COLLATE pg_catalog."default",
