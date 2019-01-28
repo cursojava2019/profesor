@@ -9,7 +9,7 @@
 <%
 
 List<String> errores= (List<String>)request.getAttribute("errores");
-Alumno formulario= (Alumno)request.getAttribute("formulario");
+AlumnoForm formulario= (AlumnoForm)request.getAttribute("formulario");
 if (errores==null){
 	errores=new ArrayList<String>();
 }
@@ -38,7 +38,7 @@ if (formulario==null){
             <div class="col-lg-12">
               <div class="panel panel-default">
                         <div class="panel-heading">
-                            Formulario de Alta
+                            Formulario de Modificacion
                         </div>
                         <div class="panel-body">
                         
@@ -96,7 +96,8 @@ if (formulario==null){
                                             <label>Observaciones</label>
                                             <textarea class="form-control" name="observaciones" rows="3"><%=formulario.getObservaciones()%></textarea>
                                         </div>
-                                      
+                                      		<input type="hidden" name="fechaAlta" value="<%=formulario.getFechaAltaString()%>"/>
+                                      		<input type="hidden" name="fechaBaja" value="<%=formulario.getFechaBajaString()%>"/>
                                         <button type="submit" class="btn btn-default">Enviar</button>
                                         <button type="reset" class="btn btn-default">Limpiar</button>
                                     </form>
