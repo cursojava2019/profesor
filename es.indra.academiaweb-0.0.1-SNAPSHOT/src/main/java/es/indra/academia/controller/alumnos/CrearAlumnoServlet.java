@@ -5,11 +5,15 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import es.indra.academia.model.service.AlumnoService;
 
@@ -20,12 +24,22 @@ import es.indra.academia.model.service.AlumnoService;
 public class CrearAlumnoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	AlumnoService alumnoService;
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public CrearAlumnoServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+
+	}
+
+	@Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+		ServletContext sc = getServletContext();
+		WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(sc);
+		this.alumnoService = wac.getBean(AlumnoService.class);
 	}
 
 	/**
@@ -60,8 +74,8 @@ public class CrearAlumnoServlet extends HttpServlet {
 			RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/jsp/alumnos/nuevo.jsp");
 			dispacher.forward(request, response);
 		} else {
-			AlumnoService alumnoService = AlumnoService.getInstance();
-			alumnoService.create(alumno);
+
+			this.alumnoService.create(alumno);
 
 			response.sendRedirect("./listado.html?mensaje=correcto");
 		}

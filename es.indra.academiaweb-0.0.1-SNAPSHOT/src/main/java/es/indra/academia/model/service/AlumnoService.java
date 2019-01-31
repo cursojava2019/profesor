@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import es.indra.academia.model.dao.AlumnoDao;
 import es.indra.academia.model.entities.Alumno;
@@ -12,24 +13,11 @@ import es.indra.academia.model.support.Dao;
 import es.indra.academia.model.support.DaoException;
 import es.indra.academia.model.support.Service;
 
+@org.springframework.stereotype.Service
 public class AlumnoService extends Service<Long, Alumno> {
-
-	private static AlumnoService singleton = null;
+	@Autowired
 	private AlumnoDao dao;
 	private Logger log = LogManager.getLogger(AlumnoService.class);
-
-	public static AlumnoService getInstance() {
-		if (singleton == null) {
-			singleton = new AlumnoService();
-		}
-		return singleton;
-
-	}
-
-	private AlumnoService() {
-		super();
-		this.dao = new AlumnoDao();
-	}
 
 	@Override
 	protected Dao<Long, Alumno> getDao() {

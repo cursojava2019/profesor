@@ -4,11 +4,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import es.indra.academia.model.entities.Alumno;
 import es.indra.academia.model.service.AlumnoService;
@@ -19,13 +23,22 @@ import es.indra.academia.model.service.AlumnoService;
 @WebServlet("/admin/alumnos/modificar.html")
 public class ModificarAlumnoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	AlumnoService alumnoService;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public ModificarAlumnoServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+
+	}
+
+	@Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+		ServletContext sc = getServletContext();
+		WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(sc);
+		this.alumnoService = wac.getBean(AlumnoService.class);
 	}
 
 	/**
@@ -37,7 +50,7 @@ public class ModificarAlumnoServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String id = request.getParameter("id");
 		Long idLong = null;
-		AlumnoService alumnoService = AlumnoService.getInstance();
+
 		try {
 			idLong = Long.parseLong(id);
 		} catch (NumberFormatException e) {
@@ -46,7 +59,7 @@ public class ModificarAlumnoServlet extends HttpServlet {
 		if (idLong == null) {
 			response.sendRedirect("./listado.html?mensaje=errorId");
 		} else {
-			Alumno alumno = alumnoService.find(idLong);
+			Alumno alumno = this.alumnoService.find(idLong);
 			if (alumno != null) {
 				AlumnoForm form = new AlumnoForm(alumno);
 				request.setAttribute("formulario", form);
@@ -80,8 +93,8 @@ public class ModificarAlumnoServlet extends HttpServlet {
 			RequestDispatcher dispacher = request.getRequestDispatcher("/WEB-INF/jsp/alumnos/modificar.jsp");
 			dispacher.forward(request, response);
 		} else {
-			AlumnoService alumnoService = AlumnoService.getInstance();
-			alumnoService.update(alumno);
+
+			this.alumnoService.update(alumno);
 
 			response.sendRedirect("./listado.html?mensaje=correcto");
 		}

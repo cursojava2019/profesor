@@ -9,11 +9,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import es.indra.academia.configuration.Configuracion;
 import es.indra.academia.model.entities.Alumno;
 import es.indra.academia.model.support.Dao;
 import es.indra.academia.model.support.DaoException;
 
+@Repository
 public class AlumnoDao implements Dao<Long, Alumno> {
 
 	private static final String CAMPOS = "nif,nombre,apellido1,apellido2,telefono,correo,repetidor,fechaalta,fechabaja,observaciones";

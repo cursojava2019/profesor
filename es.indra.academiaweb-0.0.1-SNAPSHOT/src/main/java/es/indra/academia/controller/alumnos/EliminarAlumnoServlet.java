@@ -2,11 +2,15 @@ package es.indra.academia.controller.alumnos;
 
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import es.indra.academia.model.entities.Alumno;
 import es.indra.academia.model.service.AlumnoService;
@@ -17,13 +21,22 @@ import es.indra.academia.model.service.AlumnoService;
 @WebServlet("/admin/alumnos/eliminar.html")
 public class EliminarAlumnoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	AlumnoService alumnoService;
+
+	@Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+		ServletContext sc = getServletContext();
+		WebApplicationContext wac = WebApplicationContextUtils.getWebApplicationContext(sc);
+		this.alumnoService = wac.getBean(AlumnoService.class);
+	}
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public EliminarAlumnoServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	/**
@@ -35,7 +48,7 @@ public class EliminarAlumnoServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String id = request.getParameter("id");
 		Long idLong = null;
-		AlumnoService alumnoService = AlumnoService.getInstance();
+
 		try {
 			idLong = Long.parseLong(id);
 		} catch (NumberFormatException e) {
@@ -44,9 +57,9 @@ public class EliminarAlumnoServlet extends HttpServlet {
 		if (idLong == null) {
 			response.sendRedirect("./listado.html?mensaje=errorId");
 		} else {
-			Alumno alumno = alumnoService.find(idLong);
+			Alumno alumno = this.alumnoService.find(idLong);
 			if (alumno != null) {
-				alumnoService.delete(idLong);
+				this.alumnoService.delete(idLong);
 				response.sendRedirect("./listado.html?mensaje=correcto");
 			} else {
 				response.sendRedirect("./listado.html?mensaje=errorId");
