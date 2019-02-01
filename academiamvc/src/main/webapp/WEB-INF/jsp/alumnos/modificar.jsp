@@ -1,23 +1,15 @@
+<%@page import="es.indra.academia.model.entities.Alumno"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="es.indra.academia.controller.alumnos.AlumnoForm"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 
-<%
 
-List<String> errores= (List<String>)request.getAttribute("errores");
-AlumnoForm formulario= (AlumnoForm)request.getAttribute("formulario");
-if (errores==null){
-	errores=new ArrayList<String>();
-}
-if (formulario==null){
-	formulario=new AlumnoForm();
-}
-
-%>
 <html>
 <%@include file="../plantilla/head.jsp" %>
 <body>
@@ -29,7 +21,7 @@ if (formulario==null){
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Nuevo Alumno</h1>
+                    <h1 class="page-header">Modificar Alumno</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -38,67 +30,73 @@ if (formulario==null){
             <div class="col-lg-12">
               <div class="panel panel-default">
                         <div class="panel-heading">
-                            Formulario de Alta
+                            Formulario de Modificacion
                         </div>
                         <div class="panel-body">
                         
                             <div class="row">
                                 <div class="col-lg-6">
-                                <%if (errores.size()>0) {%>
-                                <div class="alert alert-danger">
-                               		<%for(int i=0;i<errores.size();i++){ %>
-                               			<p><%=errores.get(i)%></p>
-                               		<%} %>
-                           			 </div>
-                           			 
-                           			 <%} %>
-                                    <form role="form" action="./nuevo.html" method="post">
+                                                          			 
+                           			<form:form action="./modificar.html" method="post" modelAttribute="formulario" >
+                                    	<form:hidden path="id" />
+                                       
                                         <div class="form-group">
                                             <label>NIF</label>
-                                            <input name="nif" class="form-control" value="<%=formulario.getNif()%>">
+                                           <form:input path="nif" class="form-control"/>
+                                           <form:errors path="nif" element="div" cssClass="alert alert-danger"/>
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
                                             <label>Nombre</label>
-                                            <input name="nombre" class="form-control" value="<%=formulario.getNombre()%>">
+                                             <form:input path="nombre" class="form-control"/>
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
                                             <label>Primer Apellido </label>
-                                            <input name="apellido1" class="form-control" value="<%=formulario.getApellido1()%>">
+                                            <form:input path="apellido1" class="form-control"/>
+                                            
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
                                             <label>Segundo Apellido</label>
-                                            <input name="apellido2" class="form-control" value="<%=formulario.getApellido2()%>">
+                                             <form:input path="apellido2" class="form-control"/>
+                                            
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
                                             <label>Telefono</label>
-                                            <input name="telefono" class="form-control" type="text" value="<%=formulario.getTelefono()%>">
+                                             <form:input path="telefono" class="form-control"/>
+                                            
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
                                             <label>Correo</label>
-                                            <input name="email" class="form-control" type="email" value="<%=formulario.getCorreo()%>">
+                                             <form:input path="correo" class="form-control"/>
                                             <p class="help-block"></p>
                                         </div>
+                                        <c:if test="${formulario.repetidor==true}">
+                                        <c:set var="chequeado" value="checked">
+                                        </c:set> </c:if>
                                         <div class="form-group">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input name="repetidor" type="checkbox" value="" checked="<%=formulario.getRepetidor()%>"/>Repetidor
+                                                    <form:checkbox path="repetidor"/>
+                                                    
                                                 </label>
                                             </div>
                                         </div>
                                         
                                         <div class="form-group">
                                             <label>Observaciones</label>
-                                            <textarea class="form-control" name="observaciones" rows="3"><%=formulario.getObservaciones()%></textarea>
+                                            <form:textarea path="observaciones" rows="3"/>
+                                            
                                         </div>
-                                      
+                                      		<input type="hidden" name="fechaAlta" value="<%=formulario.getFechaAltaString()%>"/>
+                                      		<input type="hidden" name="fechaBaja" value="<%=formulario.getFechaBajaString()%>"/>
                                         <button type="submit" class="btn btn-default">Enviar</button>
                                         <button type="reset" class="btn btn-default">Limpiar</button>
-                                    </form>
+                                   
+                                    </form:form>
                                 </div>
                                
                             </div>
