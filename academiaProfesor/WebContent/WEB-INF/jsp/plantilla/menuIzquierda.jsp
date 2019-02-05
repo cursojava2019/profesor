@@ -17,11 +17,13 @@
                         <li>
                             <a href="<%=request.getContextPath()%>/admin/index.html"><i class="fa fa-dashboard fa-fw"></i> Inicio</a>
                         </li>
+                        <sec:authorize access="hasRole('ALUMNOS')">
                         <li>
                             <a href="<%=request.getContextPath()%>/admin/alumnos/listado.html"><i class="fa fa-bar-chart-o fa-fw"></i> Gestión de Alumnos</a>
                             
                             <!-- /.nav-second-level -->
                         </li>
+                        </sec:authorize>
                         <li>
                            <a href="<%=request.getContextPath()%>/admin/alumnos/listado.html"><i class="fa fa-bar-chart-o fa-fw"></i> Gestión de Profesores</a>
                         </li>
