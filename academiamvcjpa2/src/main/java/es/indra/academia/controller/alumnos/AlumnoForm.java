@@ -12,6 +12,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import es.indra.academia.model.entities.Alumno;
+import es.indra.academia.model.entities.ResponsableAlumno;
 
 public class AlumnoForm {
 	@Positive
@@ -39,6 +40,7 @@ public class AlumnoForm {
 	private Calendar fechaBaja;
 	@Size(min = 0, max = 500)
 	private String observaciones;
+	private ResponsableAlumno responsable;
 
 	public AlumnoForm() {
 		super();
@@ -222,4 +224,13 @@ public class AlumnoForm {
 		this.fechaBaja = c;
 
 	}
+
+	public ResponsableAlumno getResponsable() {
+		return this.responsable;
+	}
+
+	public void setResponsable(ResponsableAlumno responsable) {
+		this.responsable = responsable;
+	}
+
 }
