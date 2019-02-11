@@ -20,6 +20,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * The persistent class for the alumno database table.
  *
@@ -27,6 +29,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "alumno")
 @NamedQuery(name = "Alumno.findAll", query = "SELECT a FROM Alumno a")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Alumno implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -73,7 +76,7 @@ public class Alumno implements Serializable {
 	private List<Clase> clases;
 
 	// bi-directional many-to-one association to ResponsableAlumno
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "responsable")
 	private ResponsableAlumno responsable;
 

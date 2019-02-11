@@ -37,9 +37,8 @@
       class="org.springframework.context.support.ConversionServiceFactoryBean">
     <property name="converters">
         <list>
-               
-<!--             <bean class="es.indra.academia.controller.converters.FechaConverter"/> -->
-            
+         <bean class="es.indra.academia.controller.converters.ResponsableAlumnoConverter"/>
+                 
         </list>
     </property>
 </bean>
