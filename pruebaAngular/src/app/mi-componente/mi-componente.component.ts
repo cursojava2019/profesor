@@ -9,6 +9,8 @@ import { Calculadora } from '../model/calculadora';
 export class MiComponenteComponent implements OnInit {
   nombre = 'Paco';
   calculadora: Calculadora;
+  nombreEntrada = '';
+  textoIntroduccion = 'Introduzca un nombre...';
   constructor() {
     this.calculadora = new Calculadora();
   }
@@ -17,5 +19,10 @@ export class MiComponenteComponent implements OnInit {
   cambiarNombre( nuevoNombre: string) {
     this.nombre = nuevoNombre;
   }
+
+  cambiarNombreEntrada() {
+    this.nombre = this.nombreEntrada;
+  }
+
 
 }
