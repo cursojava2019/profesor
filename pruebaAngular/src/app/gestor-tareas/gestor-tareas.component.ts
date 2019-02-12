@@ -22,7 +22,7 @@ constructor() {
       const tarea: Task = new Task(false , this.tareaEntrada);
       this.listado.push(tarea);
       console.log(tarea);
-      this.tareaEntrada= '';
+      this.tareaEntrada = '';
     }
 
   }
