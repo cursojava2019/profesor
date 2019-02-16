@@ -8,13 +8,16 @@
 <nav>
   <ul>
     <li>
-      <a [routerLink]="[ '']" routerLinkActive="activo" [routerLinkActiveOptions]="{exact:true}">Opcion 1</a>
+      <a [routerLink]="['']" routerLinkActive="activo" [routerLinkActiveOptions]="{exact:true}">Opcion 1</a>
     </li>
     <li>
       <a [routerLink]="[ '/path2']" routerLinkActive="activo" [routerLinkActiveOptions]="{exact:true}" >Opcion 2</a>
     </li>
     <li>
       <a [routerLink]="[ '/path3']" routerLinkActive="activo" [routerLinkActiveOptions]="{exact:true}" >Opcion 3</a>
+    </li>
+    <li>
+      <a [routerLink]="[ '/path4']" routerLinkActive="activo" [routerLinkActiveOptions]="{exact:true}" >Seccion Lazy</a>
     </li>
 
   </ul>
