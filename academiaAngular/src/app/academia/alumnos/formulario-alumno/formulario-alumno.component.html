@@ -1,0 +1,20 @@
+<h4>Introduce Alumno</h4>
+<div class="jumbotron">
+
+  <form [formGroup]="miFormulario" (ngSubmit)="guardarCambios()" novalidate="">
+
+<fieldset>
+    <div class="form-group">
+        <label class="form-control-label" for="nombre">Nombre</label>
+        <input class="form-control" type="text" placeholder="Introduzca el nombre" formControlName="nombre" [ngClass]="{'is-invalid': !miFormulario.get('nombre').valid}">
+          <div *ngIf="miFormulario.get('nombre').dirty && miFormulario.get('nombre').errors"  class="alert alert-danger">
+              <p *ngIf="miFormulario.get('nombre').hasError('required')">El nombre es obligatorio</p>
+             <p *ngIf="miFormulario.get('nombre').hasError('minlength')">Por lo menos 3 caracteres</p>
+         </div>
+
+  </div>
+
+
+  </fieldset>
+</form>
+</div>
