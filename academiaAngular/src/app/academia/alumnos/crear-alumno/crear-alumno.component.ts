@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from 'src/app/router.animations';
+import { Alumno } from 'src/app/shared/entities/alumno';
+import { AlumnoService } from 'src/app/shared/services/alumno.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-alumno',
@@ -9,9 +12,14 @@ import { routerTransition } from 'src/app/router.animations';
 })
 export class CrearAlumnoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private alumnoService: AlumnoService, private router: Router ) { }
 
   ngOnInit() {
   }
+
+   crear(a: Alumno) {
+     this.alumnoService.create(a);
+     this.router.navigate(['alumnos']);
+   }
 
 }
