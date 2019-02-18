@@ -22,12 +22,18 @@ export class AlumnoService {
   }
 
   findById(index: number) {
+    console.log("id FindById "+index);
     return this.listado[index];
   }
   create(a: Alumno) {
+    a.id=this.listado.length;
     this.listado.push(a);
   }
   delete(index: number) {
     return this.listado.splice(index, 1);
+  }
+  modificar(a: Alumno) {
+    console.log(a);
+    this.listado[a.id]= a;
   }
 }

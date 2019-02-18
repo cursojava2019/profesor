@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class AlumnosComponent implements OnInit {
   alumnos: Array<Alumno>;
 
-  constructor(alumnoService: AlumnoService, private router: Router) {
+  constructor(private alumnoService: AlumnoService, private router: Router) {
     this.alumnos = alumnoService.findAll();
 
    }
@@ -25,7 +25,7 @@ export class AlumnosComponent implements OnInit {
     this.router.navigate(['alumnos/crear']);
   }
   modificar(id: number) {
-    this.router.navigate(['alumnos/modificar']);
+    this.router.navigate(['alumnos/modificar', id]);
   }
 
   eliminar (id: number) {
